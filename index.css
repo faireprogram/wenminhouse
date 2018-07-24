@@ -1,0 +1,168 @@
+/**
+ *  it comes from air-bnb moj 
+ */}
+
+#main {
+	padding: 24px;
+}
+
+.room .img-container .img{
+	padding-top: 398px;
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+.room-details-pics {
+	position: relative;
+}
+
+.room-details-pics .view-photos {
+	position: absolute;
+	bottom: 36px;
+	left:12px;
+}
+
+.room-details-pics .view-photos button {
+	padding: 8px 16px;
+	background-color: white;
+	box-shadow: 1px 1px 1px 1px rgb(0,0,0,0.3);
+	border-radius: 4px;
+	border: transparent;
+}
+
+
+ .room-details-pics  .img-container .img {
+	padding-top: 398px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 50% 50%;
+ }
+
+ .img-inline img {
+	width: 100%;
+ }
+
+.room-detail-info {
+	max-width: 696px;
+	margin: auto;
+}
+
+.star .checked {
+	color: orange;
+}
+
+.icon-container, .icon-text {
+	display: table-cell;
+}
+
+.icon-container .icon {
+	padding-right: 8px;
+}
+
+.icon-wrapper {
+	display: inline-block;
+	padding-right: 8px;
+}
+
+.homeHighlights-container {
+	padding: 24px;
+	border: 1px solid #DBDBDB;
+}
+
+.homeHighlights-container .highlight-content span{
+	font-weight: 600;
+}
+
+.modal.show {
+	background-color: black;
+	opacity: 0.85;
+	display: block;
+	color: white;
+}
+
+.modal .close-button-container {
+	position: absolute;
+	right: 0;
+	top: 0;
+	padding: 16px 28px 8px;
+}
+
+.modal .close-button-container .icon-container .icon {
+	padding: 0;
+}
+.modal .close-button-container .material-icons{
+	font-size:48px;
+}
+
+.modal .modalTop {
+	padding: 66px 15px 20px;
+}
+
+.modal .modalContent {
+	position: relative;
+}
+
+.modal .modalContent .left-button-container, .modal .modalContent .right-button-container {
+	position: absolute;
+	height: 100%;
+}
+
+.modal .modalContent .left-button-container {
+	left: 0;
+}
+
+.modal .modalContent .right-button-container {
+	right: 0;
+}
+
+.modal .modalContent .carousel-pics-container {
+	max-width: 105vh;
+	width: 100%;
+	margin: 0 auto;
+}
+
+.modal .left-button-container button, .modal .right-button-container button, .modal .modalTop button {
+	border: none;	
+	background: none;
+	height: 100%;
+}
+
+.modal .left-button-container button .material-icons, .modal .right-button-container button .material-icons{
+	font-size: 36px;
+}
+
+
+
+
+.non-scroll {
+	overflow: hidden;
+}
+
+/**
+ * lg
+ **/
+@media only screen and (min-width: 1200px) {
+    
+}
+
+/**
+ * md
+ **/
+@media only screen and (max-width: 1200px) {
+    
+}
+
+/**
+ * sm
+ **/
+@media only screen and (max-width: 1024px) {
+    
+}
+
+/**
+ * xs
+ **/
+@media only screen and (max-width: 768px) {
+    
+}
+

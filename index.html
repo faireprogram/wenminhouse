@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title></title>
+</head>
+<link rel="stylesheet" href="index.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+ <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+ <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ractive/0.9.0/ractive.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/history.js/1.8/uncompressed/history.adapter.native.min.js"></script>
+<script src="main.html" type="text/html"></script>
+
+<script src="main.js"></script>
+
+<!-- partial -->
+<script id="imgPartial" type="text/html">
+	<div class="img-container">
+		{{#if type === 'inline'}}
+			<div class="img-inline">
+				<img src="{{.url}}" />
+			</div>
+		{{else}}
+			<div class="img" style="background-image: url({{.url}});"></div>
+		{{/if}}
+	</div>
+</script>
+<script id="articlePartial" type="text/html">
+	<div class="room" on-click="navigateToRoom">
+		<h4>{{c(roomName)}}</h4>
+		{{>star {
+			rateNumber: rate
+		}}}
+
+		{{>img {
+			url: images.details[0],
+			type: 'inline'
+		}}}
+	</div>
+</script>
+<script id="starPartial" type="text/html">
+	<div class="star">
+		{{c('rateHeader')}}
+		{{#each ~/stars: i}} 
+			<span class="fa fa-star {{i < rateNumber ? 'checked': ''}}"></span>
+		{{/each}}
+	</div>
+</script>
+<script id="iconPartial" type="text/html">
+	<div class="icon-wrapper">
+		<div class="icon-container">
+			<div class="icon">
+				{{#if clazz}}
+					<span class="{{clazz}} {{clazz}}-{{type}}" aria-hidden="true"></span>
+				{{else}}
+					<span class="material-icons" aria-hidden="true">{{type}}</span>
+				{{/if}}
+			</div>
+		</div>
+		{{#if text}}
+			<div class="icon-text">
+				<span>{{text}}</span>
+			</div>
+		{{/if}}
+	</div>
+</script>
+
+<script id="carouselView" type="text/html">
+<div class="modal {{#if show}}show{{/if}}" on-click="stopPropagation">
+	<div class="modalTop">
+		<div class="close-button-container">
+			<button on-click="close">
+				{{> icon {
+					type: 'close'
+				}}}
+			</button>
+		</div>
+	</div>
+	<div class="modalContent">
+		<div class="left-button-container">
+			<button class="left-button" on-click="previous">
+				{{> icon {
+					type: 'arrow_back_ios'
+				}}}
+			</button>
+		</div>
+		
+		<div class="right-button-container">
+			<button class="right-button" on-click="next">
+				{{> icon {
+					type: 'arrow_forward_ios'
+				}}}
+			</button>
+		</div>
+		<div class="carousel-pics-container">
+			<div>
+				{{currentSelectIndex + 1}}/{{urls.length}}
+			</div>
+			<div>
+				{{>img {
+					url: urls[currentSelectIndex],
+					type: 'inline'
+				}}}
+			</div>
+		</div>
+	</div>
+</div>
+</script>
+
+
+
+
+<script id="room" type="text/html">
+	<section class="room-details-pics" on-click="viewMorePics">
+		{{>img {
+			url: room.images.details[0]
+		}}}
+
+		<div class="view-photos">
+			<button>
+				{{c('VIEW.PHOTO')}}
+			</button>
+		</div>
+
+		{{#if ~/showMorepics}}
+			<carouselView 
+				show={{~/showMorepics}}
+				urls={{room.images.details}}
+				currentSelectIndex=0
+			/>
+		{{/if}}
+	</section>
+	<section class="room-detail-info">
+		<div>{{c(room.part)}}</div>
+		<div>{{c(room.roomName)}}</div>
+		<div>	
+			{{>icon {
+				type: 'group',
+				text: room.maxGuests + ' ' + c('GUESTS'),
+				clazz: 'fa'
+			} }}
+			{{>icon {
+				type: 'building',
+				text: 1 + ' ' + c('BEDROOM'),
+				clazz: 'fa'
+			} }}
+			{{>icon {
+				type: 'hotel',
+				text: room.roomDetail.beds.length + ' ' + c('BED'),
+				clazz: 'fa'
+			} }}
+			{{>icon {
+				type: 'bath',
+				text: room.bathRoomNum + ' ' + c('BATH'),
+				clazz: 'fa'
+			} }}
+		</div>
+
+		<!-- HOME Highlights -->
+		<div class="homeHighlights-container">
+			<div class="hightlight-header">
+				{{c('HIGHLIGHT-HEADER')}}
+			</div>
+			<div class="highlight-content">
+				{{{dc(room.homeHighLights)}}}
+			</div>
+		</div>
+
+	</section>
+</script>
+
+<script id="template" type="text/html">
+	<section class="carosel-content"></section>
+	<section class="house-content">
+		<div class="container-fluid">
+			<div class="row">
+				{{#each rooms}}
+					<div class="col-sm-6 col-xs-12">
+						{{>article}}
+					</div>
+				{{/each}}
+			</div>
+		</div>
+	</section>
+</script>
+
+<body>
+	<nav></nav>
+	<main id="main">
+	</main>
+</body>
+<script src="index.js" src="script/text"></script>
+
+</html>
